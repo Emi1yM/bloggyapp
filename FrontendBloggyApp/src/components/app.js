@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from "./Home";
 import Dashboard from "./Dashboard";
@@ -49,11 +50,14 @@ export default class App extends Component {
     this.checkLoginStatus();
   }
 
-  handleLogout() {
+  handleLogout(){
+    console.log("Logging out")
     this.setState({
       loggedInStatus: "NOT_LOGGED_IN",
-      user: {}
+      user: null
     });
+    window.localStorage.current_user = null
+    console.log("localStorage:", window.localStorage.current_user)
   }
 
   handleLogin(data) {
@@ -61,6 +65,8 @@ export default class App extends Component {
       loggedInStatus: "LOGGED_IN",
       user: data.user
     });
+    console.log(data)
+    window.localStorage["current_user"] = data.user.id //????
   }
 
   render() {

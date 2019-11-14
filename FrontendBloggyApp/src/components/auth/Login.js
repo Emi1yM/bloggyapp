@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import {
+    Container, Col, Form,
+    FormGroup, Label, Input,
+    Button,
+  } from 'reactstrap';
+
 import axios from 'axios';
 
 export default class Login extends Component {
@@ -27,13 +33,13 @@ export default class Login extends Component {
             password
         } = this.state;
         
-        axios.post("http://localhost:3001/sessions", {
+        axios.post("http://localhost:3000/sessions", {
         user: {
             email: email,
             password: password
         }
     },
-    { withCredentials: true }
+    // { withCredentials: true }
     ).then(response => {
         if (response.data.status ==='created') {
         this.props.handleSuccessfulAuth(response.data);
@@ -47,25 +53,34 @@ export default class Login extends Component {
     
     render() {
         return (
-            <div>
-                <form onSubmit={this.handleSubmit}>
-                    <input type="email" 
+            <Container className="Login">
+                <Form className="form" onSubmit={this.handleSubmit}>
+                    <Col>
+                    <FormGroup>
+                        <Label>Email</Label>
+                    <Input type="email" 
                     name="email" 
                     placeholder="Email" 
                     value={this.state.email} 
                     onChange={this.handleChange} 
                     required />
-
-                    <input type="password" 
+                    </FormGroup>
+                    </Col>
+                    <Col>
+                    <FormGroup>
+                        <Label>Password</Label>
+                    <Input type="password" 
                     name="password" 
                     placeholder="Password" 
                     value={this.state.password} 
                     onChange={this.handleChange} 
                     required />
+                    </FormGroup>
+                    </Col>
 
-                    <button type="submit">Login</button>
-                </form>
-            </div>
+                    <button className="btn draw-border" type="submit">Login</button>
+                </Form>
+            </Container>
         )
     }
 }
