@@ -47,7 +47,7 @@ export default class Post extends React.Component{
         :<p>{this.props.post.content}</p>
       
       return(
-        <Card>
+        <div>
           <h2>{title}</h2>
           <h1>{date}</h1>
           <p>{content}</p>
@@ -55,7 +55,7 @@ export default class Post extends React.Component{
           {this.state.editable? 'Submit' : 'Edit'}</Button>
           <Button onClick={() => 
             this.props.handleDelete(this.props.post.id)}>Delete</Button> */}
-        </Card>
+        </div>
       )      
     }
   }
